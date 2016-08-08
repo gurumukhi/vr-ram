@@ -1,132 +1,139 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-    <meta charset="utf-8">
-    <title>Lyrics 3D</title>
-    <meta name="description" content="">
-    <script src="./js/aframe.min.js"></script>
-    <script src="./js/aframe-bmfont-text-component.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-</head>
-
-<body>
-    <a-scene>
-        <a-assets>
-            <img id="mute" src="assets/volume-mute.png">
-            <img id="unmute" src="assets/volume-high_2.png">
-            <img id="close" src="assets/close-circled.png">
-            <a-mixin id="cube" geometry="primitive: box"></a-mixin>
-            <a-mixin id="cube-hovered" material="color: magenta"></a-mixin>
-            <a-mixin id="cube-selected" material="color: cyan"></a-mixin>
-            <a-mixin id="red" material="color: red"></a-mixin>
-            <a-mixin id="green" material="color: green"></a-mixin>
-            <a-mixin id="blue" material="color: blue"></a-mixin>
-            <a-mixin id="yellow" material="color: yellow"></a-mixin>
-            <a-mixin id="sphere" geometry="primitive: sphere"></a-mixin>
-        </a-assets>
-        <a-assets timeout="999999999">
-            <audio id="audio" src="assets/e.mp3"></audio>
-        </a-assets>
-        <a-image id="mute-image" src="#mute" position="-1 0 0"></a-image>
-        <a-image id="close-image" src="#close" position="1 0 0"></a-image>
-        <a-entity position="0 2 4">
-            <a-entity camera look-controls wasd-controls>
-                <a-entity position="0 0 -3" scale="0.2 0.2 0.2" geometry="primitive: ring; radiusOuter: 0.20;radiusInner: 0.10;" material="color: #ADD8E6; shader: flat" cursor="maxDistance: 30; fuse: true">
-                    <a-animation begin="click" easing="ease-in" attribute="scale" fill="backwards" from="0.1 0.1 0.1" to="1 1 1" dur="150"></a-animation>
-                    <a-animation begin="fusing" easing="ease-in" attribute="scale" fill="forwards" from="1 1 1" to="0.2 0.2 0.2" dur="1500"></a-animation>
+    <head>
+        <meta charset="utf-8">
+        <title>Lyrics VR</title>
+        <meta name="description" content="">
+        <script src="./js/aframe.min.js"></script>
+        <script src="./js/aframe-bmfont-text-component.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    </head>
+    <body>
+        <a-scene>
+            <a-assets>
+                <img id="mute" src="assets/volume-mute.png">
+                <img id="unmute" src="assets/volume-high_2.png">
+                <img id="close" src="assets/close-circled.png">
+                <a-mixin id="cube" geometry="primitive: box"></a-mixin>
+                <a-mixin id="cube-hovered" material="color: magenta"></a-mixin>
+                <a-mixin id="cube-selected" material="color: cyan"></a-mixin>
+                <a-mixin id="red" material="color: red"></a-mixin>
+                <a-mixin id="green" material="color: green"></a-mixin>
+                <a-mixin id="blue" material="color: blue"></a-mixin>
+                <a-mixin id="yellow" material="color: yellow"></a-mixin>
+                <a-mixin id="sphere" geometry="primitive: sphere"></a-mixin>
+            </a-assets>
+            <a-assets timeout="999999999">
+                <audio id="audio" src="assets/e.mp3"></audio>
+            </a-assets>
+            <a-image id="mute-image" src="#mute" position="-1 0 0"></a-image>
+            <a-image id="close-image" src="#close" position="1 0 0"></a-image>
+            <a-entity position="0 2 4">
+                <a-entity camera look-controls wasd-controls>
+                    <a-entity position="0 0 -3" scale="0.2 0.2 0.2" geometry="primitive: ring; radiusOuter: 0.20;radiusInner: 0.10;" material="color: #ADD8E6; shader: flat" cursor="maxDistance: 30; fuse: true">
+                        <a-animation begin="click" easing="ease-in" attribute="scale" fill="backwards" from="0.1 0.1 0.1" to="1 1 1" dur="150"></a-animation>
+                        <a-animation begin="fusing" easing="ease-in" attribute="scale" fill="forwards" from="1 1 1" to="0.2 0.2 0.2" dur="1500"></a-animation>
+                    </a-entity>
                 </a-entity>
             </a-entity>
-        </a-entity>
-        <script id="hidden-template" type="text/x-custom-template">
-            <a-entity bmfont-text="text: As sly as a fox;align:left" position="0 50 -10" scale="2 2 2">
-                <a-animation attribute="position" begin="6000" from="-1.5 2.3 -10" to="-1.5 2.3 10" dur="2000" easing="linear" repeat="0"></a-animation>
-                <a-animation attribute="visible" begin="6000" dur="2000" from="true" to="false"></a-animation>
-            </a-entity>
-            <a-entity bmfont-text="text: as strong as an ox;align:left" position="0 50 -10" scale="2 2 2">
-                <a-animation attribute="position" begin="8000" from="-1.5 2.5 -10" to="-1.5 2.5 10" dur="2000" easing="linear" repeat="0"></a-animation>
-                <a-animation attribute="visible" begin="8000" dur="2000" from="true" to="false"></a-animation>
-            </a-entity>
-            <a-entity bmfont-text="text: As fast as a hare;align:left" position="0 50 -10" scale="2 2 2">
-                <a-animation attribute="position" begin="10000" from="-1.5 2.5 -10" to="-1.5 2.5 10" dur="2000" easing="linear" repeat="0"></a-animation>
-                <a-animation attribute="visible" begin="10000" dur="2000" from="true" to="false"></a-animation>
-            </a-entity>
-            <a-entity bmfont-text="text: as brave as a bear;align:left" position="0 50 -10" scale="2 2 2">
-                <a-animation attribute="position" begin="11000" from="-1.5 2.5 -10" to="-1.5 2.5 10" dur="2000" easing="linear" repeat="0"></a-animation>
-                <a-animation attribute="visible" begin="11000" dur="2000" from="true" to="false"></a-animation>
-            </a-entity>
-            <a-entity bmfont-text="text: As free as a bird;align:left" position="0 50 -10" scale="2 2 2">
-                <a-animation attribute="position" begin="13000" from="-1.5 2.5 -10" to="-1.5 2.5 10" dur="2000" easing="linear" repeat="0"></a-animation>
-                <a-animation attribute="visible" begin="13000" dur="2000" from="true" to="false"></a-animation>
-            </a-entity>
-            <a-entity bmfont-text="text: as neat as a word;align:left" position="0 50 -10" scale="2 2 2">
-                <a-animation attribute="position" begin="15000" from="-1.5 2.5 -10" to="-1.5 2.5 10" dur="2000" easing="linear" repeat="0"></a-animation>
-                <a-animation attribute="visible" begin="15000" dur="2000" from="true" to="false"></a-animation>
-            </a-entity>
-            <a-entity bmfont-text="text: As quiet as a mouse;align:left" position="0 50 -10" scale="2 2 2">
-                <a-animation attribute="position" begin="16500" from="-1.5 2.5 -10" to="-1.5 2.5 10" dur="2000" easing="linear" repeat="0"></a-animation>
-                <a-animation attribute="visible" begin="16500" dur="2000" from="true" to="false"></a-animation>
-            </a-entity>
-            <a-entity bmfont-text="text: as big as a house;align:left" position="0 50 -10" scale="2 2 2">
-                <a-animation attribute="position" begin="18000" from="-1.5 2.5 -10" to="-1.5 2.5 10" dur="2000" easing="linear" repeat="0"></a-animation>
-                <a-animation attribute="visible" begin="18000" dur="2000" from="true" to="false"></a-animation>
-            </a-entity>
-            <a-entity bmfont-text="text: All;align:left" position="0 50 -10" scale="2 2 2">
-                <a-animation attribute="position" begin="20000" from="0 2.5 -10" to="0 2.5 10" dur="5000" easing="linear" repeat="0"></a-animation>
-                <a-animation attribute="visible" begin="20000" dur="5000" from="true" to="false"></a-animation>
-            </a-entity>
-            <a-entity bmfont-text="text: i wanna be;align:left" position="0 50 -10" scale="2 2 2">
-                <a-animation attribute="position" begin="23000" from="-1.5 2.5 -10" to="-1.5 2.5 10" dur="3000" easing="linear" repeat="0"></a-animation>
-                <a-animation attribute="visible" begin="23000" dur="3000" from="true" to="false"></a-animation>
-            </a-entity>
-            <a-entity bmfont-text="text: All;align:leftalign:left" position="0 50 -10" scale="2 2 2">
-                <a-animation attribute="position" begin="26000" from="-.5 2.5 -10" to="-.5 2.5 10" dur="5000" easing="linear" repeat="0"></a-animation>
-                <a-animation attribute="visible" begin="26000" dur="5000" from="true" to="false"></a-animation>
-            </a-entity>
-            <a-entity bmfont-text="text: i wanna be;align:left" position="0 50 -10" scale="2 2 2">
-                <a-animation attribute="position" begin="30000" from="-1.5 2.5 -10" to="-1.5 2.5 10" dur="3000" easing="linear" repeat="0"></a-animation>
-                <a-animation attribute="visible" begin="30000" dur="3000" from="true" to="false"></a-animation>
-            </a-entity>
-            <a-entity bmfont-text="text: All;align:left" position="0 50 -10" scale="2 2 2">
-                <a-animation attribute="position" begin="33000" from="-1.5 2.5 -10" to="-1.5 2.5 10" dur="5000" easing="linear" repeat="0"></a-animation>
-                <a-animation attribute="visible" begin="33000" dur="5000" from="true" to="false"></a-animation>
-            </a-entity>
-            <a-entity bmfont-text="text: i wanna be;align:left" position="0 50 -10" scale="2 2 2">
-                <a-animation attribute="position" begin="37000" from="-1.5 2.5 -10" to="-1.5 2.5 10" dur="3000" easing="linear" repeat="0"></a-animation>
-                <a-animation attribute="visible" begin="37000" dur="3000" from="true" to="false"></a-animation>
-            </a-entity>
-            <a-entity bmfont-text="text: is everything;align:left" position="0 50 -10" scale="2 2 2">
-                <a-animation attribute="position" begin="40000" from="-1.5 2.5 -10" to="-1.5 2 10" dur="3000" easing="linear" repeat="0"></a-animation>
-                <a-animation attribute="visible" begin="40000" dur="3000" from="true" to="false"></a-animation>
-            </a-entity>
-            <a-sky color="#ECECEC"></a-sky>
-    </a-scene>
-    </script>
-    <script>
-        var template = $('#hidden-template').html();
-        var audio = document.querySelector('#audio');
-        audio.addEventListener('loadeddata', function() {
-            audio.play();
-            $('a-scene').append(template);
-        });
-        var muted = false;
-        var muteImage = document.querySelector("#mute-image");
-        document.querySelector('#mute-image').addEventListener('click', function() {
-            muted = !muted;
-            document.getElementById('background_audio').muted = muted;
-            if (muted) {
-                muteImage.setAttribute('material', {
-                    'src': '#unmute',
-                    'transparent': true
-                });
-            } else {
-                muteImage.setAttribute('material', {
-                    'src': '#mute',
-                    'transparent': true
-                });
-            }
-        });
-    </script>
-</body>
 
+            <script id="hidden-template" type="text/x-custom-template">
+                <a-entity bmfont-text="text:_ ~ Lenka ~ _;" scale="2 2 2">
+                    <a-animation attribute="position" begin="0" from="-1.5 2.5 -10" to="-1.5 2.5 10" dur="5000" easing="linear" repeat="0"></a-animation>
+                    <a-animation attribute="visible" begin="0" dur="5000" from="true" to="false"></a-animation>
+                </a-entity>            
+                <a-entity bmfont-text="text: As sly as a fox;align:left" position="0 50 -10" scale="2 2 2">
+                    <a-animation attribute="position" begin="6000" from="-1.5 2.3 -10" to="-1.5 2.3 10" dur="2000" easing="linear" repeat="0"></a-animation>
+                    <a-animation attribute="visible" begin="6000" dur="2000" from="true" to="false"></a-animation>
+                </a-entity>
+                <a-entity bmfont-text="text: as strong as an ox;align:left" position="0 50 -10" scale="2 2 2">
+                    <a-animation attribute="position" begin="8000" from="-1.5 2.5 -10" to="-1.5 2.5 10" dur="2000" easing="linear" repeat="0"></a-animation>
+                    <a-animation attribute="visible" begin="8000" dur="2000" from="true" to="false"></a-animation>
+                </a-entity>
+                <a-entity bmfont-text="text: As fast as a hare;align:left" position="0 50 -10" scale="2 2 2">
+                    <a-animation attribute="position" begin="10000" from="-1.5 2.5 -10" to="-1.5 2.5 10" dur="2000" easing="linear" repeat="0"></a-animation>
+                    <a-animation attribute="visible" begin="10000" dur="2000" from="true" to="false"></a-animation>
+                </a-entity>
+                <a-entity bmfont-text="text: as brave as a bear;align:left" position="0 50 -10" scale="2 2 2">
+                    <a-animation attribute="position" begin="11000" from="-1.5 2.5 -10" to="-1.5 2.5 10" dur="2000" easing="linear" repeat="0"></a-animation>
+                    <a-animation attribute="visible" begin="11000" dur="2000" from="true" to="false"></a-animation>
+                </a-entity>
+                <a-entity bmfont-text="text: As free as a bird;align:left" position="0 50 -10" scale="2 2 2">
+                    <a-animation attribute="position" begin="13000" from="-1.5 2.5 -10" to="-1.5 2.5 10" dur="2000" easing="linear" repeat="0"></a-animation>
+                    <a-animation attribute="visible" begin="13000" dur="2000" from="true" to="false"></a-animation>
+                </a-entity>
+                <a-entity bmfont-text="text: as neat as a word;align:left" position="0 50 -10" scale="2 2 2">
+                    <a-animation attribute="position" begin="15000" from="-1.5 2.5 -10" to="-1.5 2.5 10" dur="2000" easing="linear" repeat="0"></a-animation>
+                    <a-animation attribute="visible" begin="15000" dur="2000" from="true" to="false"></a-animation>
+                </a-entity>
+                <a-entity bmfont-text="text: As quiet as a mouse;align:left" position="0 50 -10" scale="2 2 2">
+                    <a-animation attribute="position" begin="16500" from="-1.5 2.5 -10" to="-1.5 2.5 10" dur="2000" easing="linear" repeat="0"></a-animation>
+                    <a-animation attribute="visible" begin="16500" dur="2000" from="true" to="false"></a-animation>
+                </a-entity>
+                <a-entity bmfont-text="text: as big as a house;align:left" position="0 50 -10" scale="2 2 2">
+                    <a-animation attribute="position" begin="18000" from="-1.5 2.5 -10" to="-1.5 2.5 10" dur="2000" easing="linear" repeat="0"></a-animation>
+                    <a-animation attribute="visible" begin="18000" dur="2000" from="true" to="false"></a-animation>
+                </a-entity>
+                <a-entity bmfont-text="text: All;align:left" position="0 50 -10" scale="2 2 2">
+                    <a-animation attribute="position" begin="20000" from="0 2.5 -10" to="0 2.5 10" dur="5000" easing="linear" repeat="0"></a-animation>
+                    <a-animation attribute="visible" begin="20000" dur="5000" from="true" to="false"></a-animation>
+                </a-entity>
+                <a-entity bmfont-text="text: i wanna be;align:left" position="0 50 -10" scale="2 2 2">
+                    <a-animation attribute="position" begin="23000" from="-1.5 2.5 -10" to="-1.5 2.5 10" dur="3000" easing="linear" repeat="0"></a-animation>
+                    <a-animation attribute="visible" begin="23000" dur="3000" from="true" to="false"></a-animation>
+                </a-entity>
+                <a-entity bmfont-text="text: All;align:leftalign:left" position="0 50 -10" scale="2 2 2">
+                    <a-animation attribute="position" begin="26000" from="-.5 2.5 -10" to="-.5 2.5 10" dur="5000" easing="linear" repeat="0"></a-animation>
+                    <a-animation attribute="visible" begin="26000" dur="5000" from="true" to="false"></a-animation>
+                </a-entity>
+                <a-entity bmfont-text="text: i wanna be;align:left" position="0 50 -10" scale="2 2 2">
+                    <a-animation attribute="position" begin="30000" from="-1.5 2.5 -10" to="-1.5 2.5 10" dur="3000" easing="linear" repeat="0"></a-animation>
+                    <a-animation attribute="visible" begin="30000" dur="3000" from="true" to="false"></a-animation>
+                </a-entity>
+                <a-entity bmfont-text="text: All;align:left" position="0 50 -10" scale="2 2 2">
+                    <a-animation attribute="position" begin="33000" from="-1.5 2.5 -10" to="-1.5 2.5 10" dur="5000" easing="linear" repeat="0"></a-animation>
+                    <a-animation attribute="visible" begin="33000" dur="5000" from="true" to="false"></a-animation>
+                </a-entity>
+                <a-entity bmfont-text="text: i wanna be;align:left" position="0 50 -10" scale="2 2 2">
+                    <a-animation attribute="position" begin="37000" from="-1.5 2.5 -10" to="-1.5 2.5 10" dur="3000" easing="linear" repeat="0"></a-animation>
+                    <a-animation attribute="visible" begin="37000" dur="3000" from="true" to="false"></a-animation>
+                </a-entity>
+                <a-entity bmfont-text="text: is everything;align:left" position="0 50 -10" scale="2 2 2">
+                    <a-animation attribute="position" begin="40000" from="-1.5 2.5 -10" to="-1.5 2 10" dur="3000" easing="linear" repeat="0"></a-animation>
+                    <a-animation attribute="visible" begin="40000" dur="3000" from="true" to="false"></a-animation>
+                </a-entity>
+                <a-sky color="#ECECEC"></a-sky>
+            </script>
+        </a-scene>
+        <script>
+            var template = $('#hidden-template').html();
+            var audio = document.querySelector('#audio');
+            audio.addEventListener('loadeddata', function() {
+                audio.play();
+                $('a-scene').append(template);
+            });
+            var muted = false;
+            var muteImage = document.querySelector("#mute-image");
+            document.querySelector('#mute-image').addEventListener('click', function() {
+                muted = !muted;
+                document.getElementById('background_audio').muted = muted;
+                if (muted) {
+                    muteImage.setAttribute('material', {
+                        'src': '#unmute',
+                        'transparent': true
+                    });
+                } else {
+                    muteImage.setAttribute('material', {
+                        'src': '#mute',
+                        'transparent': true
+                    });
+                }
+            });
+            document.querySelector("#close-image").addEventListener('click', function() {
+            console.log('Exiting demo');
+            console.log(window.location);
+            window.location.href = "../../index.html";
+        });
+        </script>
+    </body>
 </html>
