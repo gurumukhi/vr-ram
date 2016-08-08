@@ -1,43 +1,44 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>Lyrics VR</title>
-        <meta name="description" content="">
-        <script src="./js/aframe.min.js"></script>
-        <script src="./js/aframe-bmfont-text-component.min.js"></script>
-    </head>
-    <body>
-        <a-scene>
-            <a-assets>
-                <audio id="background_audio" src="assets/e.mp3" autoplay></audio>
-                <img id="mute" src="assets/volume-mute.png">
-                <img id="unmute" src="assets/volume-high_2.png">
-                <img id="close" src="assets/close-circled.png">
-                <a-mixin id="cube" geometry="primitive: box"></a-mixin>
-                <a-mixin id="cube-hovered" material="color: magenta"></a-mixin>
-                <a-mixin id="cube-selected" material="color: cyan"></a-mixin>
-                <a-mixin id="red" material="color: red"></a-mixin>
-                <a-mixin id="green" material="color: green"></a-mixin>
-                <a-mixin id="blue" material="color: blue"></a-mixin>
-                <a-mixin id="yellow" material="color: yellow"></a-mixin>
-                <a-mixin id="sphere" geometry="primitive: sphere"></a-mixin>
-            </a-assets>
-            <a-image id="mute-image" src="#mute" position="-1 0 0"></a-image>
-            <a-image id="close-image" src="#close" position="1 0 0"></a-image>
-            
-            <a-entity position="0 2 4">
-                <a-entity camera look-controls wasd-controls>
-                    <a-entity position="0 0 -3" scale="0.2 0.2 0.2"  geometry="primitive: ring; radiusOuter: 0.20;radiusInner: 0.10;" material="color: #ADD8E6; shader: flat" cursor="maxDistance: 30; fuse: true">
-                        <a-animation begin="click" easing="ease-in" attribute="scale" fill="backwards" from="0.1 0.1 0.1" to="1 1 1" dur="150"></a-animation>
-                        <a-animation begin="fusing" easing="ease-in" attribute="scale" fill="forwards" from="1 1 1" to="0.2 0.2 0.2" dur="1500"></a-animation>
-                    </a-entity>
+
+<head>
+    <meta charset="utf-8">
+    <title>Lyrics 3D</title>
+    <meta name="description" content="">
+    <script src="./js/aframe.min.js"></script>
+    <script src="./js/aframe-bmfont-text-component.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+</head>
+
+<body>
+    <a-scene>
+        <a-assets>
+            <img id="mute" src="assets/volume-mute.png">
+            <img id="unmute" src="assets/volume-high_2.png">
+            <img id="close" src="assets/close-circled.png">
+            <a-mixin id="cube" geometry="primitive: box"></a-mixin>
+            <a-mixin id="cube-hovered" material="color: magenta"></a-mixin>
+            <a-mixin id="cube-selected" material="color: cyan"></a-mixin>
+            <a-mixin id="red" material="color: red"></a-mixin>
+            <a-mixin id="green" material="color: green"></a-mixin>
+            <a-mixin id="blue" material="color: blue"></a-mixin>
+            <a-mixin id="yellow" material="color: yellow"></a-mixin>
+            <a-mixin id="sphere" geometry="primitive: sphere"></a-mixin>
+        </a-assets>
+        <a-assets timeout="999999999">
+            <audio id="audio" src="assets/e.mp3"></audio>
+        </a-assets>
+        <a-image id="mute-image" src="#mute" position="-1 0 0"></a-image>
+        <a-image id="close-image" src="#close" position="1 0 0"></a-image>
+        <a-entity position="0 2 4">
+            <a-entity camera look-controls wasd-controls>
+                <a-entity position="0 0 -3" scale="0.2 0.2 0.2" geometry="primitive: ring; radiusOuter: 0.20;radiusInner: 0.10;" material="color: #ADD8E6; shader: flat" cursor="maxDistance: 30; fuse: true">
+                    <a-animation begin="click" easing="ease-in" attribute="scale" fill="backwards" from="0.1 0.1 0.1" to="1 1 1" dur="150"></a-animation>
+                    <a-animation begin="fusing" easing="ease-in" attribute="scale" fill="forwards" from="1 1 1" to="0.2 0.2 0.2" dur="1500"></a-animation>
                 </a-entity>
             </a-entity>
-            <a-entity bmfont-text="text:_ ~ Lenka ~ _;" scale="2 2 2">
-                <a-animation attribute="position" begin="0" from="-1.5 2.5 -10" to="-1.5 2.5 10" dur="5000" easing="linear" repeat="0"></a-animation>
-                <a-animation attribute="visible" begin="0" dur="5000" from="true" to="false"></a-animation>
-            </a-entity>
+        </a-entity>
+        <script id="hidden-template" type="text/x-custom-template">
             <a-entity bmfont-text="text: As sly as a fox;align:left" position="0 50 -10" scale="2 2 2">
                 <a-animation attribute="position" begin="6000" from="-1.5 2.3 -10" to="-1.5 2.3 10" dur="2000" easing="linear" repeat="0"></a-animation>
                 <a-animation attribute="visible" begin="6000" dur="2000" from="true" to="false"></a-animation>
@@ -99,12 +100,17 @@
                 <a-animation attribute="visible" begin="40000" dur="3000" from="true" to="false"></a-animation>
             </a-entity>
             <a-sky color="#ECECEC"></a-sky>
-        </a-scene>
-        <script>
+    </a-scene>
+    </script>
+    <script>
+        var template = $('#hidden-template').html();
+        var audio = document.querySelector('#audio');
+        audio.addEventListener('loadeddata', function() {
+            audio.play();
+            $('a-scene').append(template);
+        });
         var muted = false;
         var muteImage = document.querySelector("#mute-image");
-        // document.getElementById('mute').style.display = 'block';
-        // document.getElementById('unmute').style.display = 'none';
         document.querySelector('#mute-image').addEventListener('click', function() {
             muted = !muted;
             document.getElementById('background_audio').muted = muted;
@@ -113,7 +119,6 @@
                     'src': '#unmute',
                     'transparent': true
                 });
-                // console.log(muteImage.components.material.data.src, 'unmute');
             } else {
                 muteImage.setAttribute('material', {
                     'src': '#mute',
@@ -121,18 +126,7 @@
                 });
             }
         });
-        document.querySelector("#close-image").addEventListener('click', function() {
-            console.log('Exiting demo');
-            console.log(window.location);
-            window.location.href = "../../index.html";
-        }); 
-        </script>
-    </body>
-</html>
-<!--
-Resources from : 
-    http://iconshow.me/
+    </script>
+</body>
 
-TODO :
-    http://mattdesl.github.io/aframe-bmfont-text/
--->
+</html>
