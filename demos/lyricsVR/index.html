@@ -107,7 +107,7 @@
         </a-scene>
         <script>
             var template = $('#hidden-template').html();
-            var audio = document.querySelector('#audio');
+            var audio = document.querySelector('#background_audio');
             audio.addEventListener('loadeddata', function() {
                 audio.play();
                 $('a-scene').append(template);
