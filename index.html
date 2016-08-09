@@ -1,21 +1,21 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>About VR in VR</title>
+        <title>Experience Virtual Reality</title>
         <meta name="description" content="VR">
         <script src="./js/aframe.min.js"></script>
     </head>
     <body>
         <a-scene>
             <a-assets>
-                <img id="panorama" src="assets/panorama-background.jpg"></a-mixin>
-                <img id="panorama-demo" src="./assets/panorama.png"></a-mixin>
-                <img id="mozvr-demo" src="./assets/mozvr.png"></a-mixin>
-                <img id="video-demo" src="./assets/video.png"></a-mixin>
-                <img id="lyrics-demo" src="./assets/lyrics.png"></a-mixin>
+                <img id="panorama" src="assets/panorama-background.jpg">
+                <img id="panorama-demo" src="assets/panorama.png">
+                <img id="mozvr-demo" src="assets/mozvr.png">
+                <img id="video-demo" src="assets/video.png">
+                <img id="lyrics-demo" src="assets/lyrics.png">
             </a-assets>
 
-            <a-entity position="0 2 4">
+            <a-entity>
                 <a-entity camera look-controls wasd-controls>
                     <a-entity position="0 0 -3" scale="0.2 0.2 0.2" geometry="primitive: ring; radiusOuter: 0.20; radiusInner: 0.13;" material="color: #ADD8E6; shader: flat" cursor="maxDistance: 30; fuse: true">
                         <a-animation begin="click" easing="ease-in" attribute="scale" fill="backwards" from="0.1 0.1 0.1" to="1 1 1" dur="150"></a-animation>
@@ -24,22 +24,33 @@
                 </a-entity>
             </a-entity>
 
-            <a-curvedimage id="mozvr" src="#mozvr-demo" transparent="true"  height="3" radius="1" rotation="0 120 0" theta-length="170" scale="1.2 1.2 1.2" position="-4 1.5 0"></a-curvedimage>
-            <a-curvedimage id="pana" src="#panorama-demo" transparent="true"  height="4" radius="1.4" rotation="0 90 3" theta-length="180" position="-2.5 4 -3" scale="1.4 1.4 1.4"></a-curvedimage>
-            <a-curvedimage id="lyrics" src="#lyrics-demo" transparent="true" position="1.5 4 -3" height="4" radius="1.4" theta-length="180"rotation="0 60 -3" scale="1.4 1.4 1.4"></a-curveimage>
-            <a-curvedimage id="video" src="#video-demo" transparent="true" position="-2 -2 3" height="3" radius="2" theta-length="60" rotation="0 70 0"  scale="1.2 1.2 1.2"></a-curvedimage>
+            <a-curvedimage id="mozvr" src="#mozvr-demo" transparent="true" 
+              height="2" radius="3" theta-length="40" rotation="0 240 0" position="0 0 -2">
+            </a-curvedimage>
 
-     <a-sky src="#panorama" rotation="0 -150 0" opacity="0.5"></a-sky>
+            <a-curvedimage id="pana" src="#panorama-demo" transparent="true" 
+              height="2" radius="3" theta-length="40" rotation="0 190 0" position="0 0 -2">
+            </a-curvedimage>
+            
+            <a-curvedimage id="lyrics" src="#lyrics-demo" transparent="true" 
+              height="2" radius="3" theta-length="40" rotation="0  130 0" position="0 0 -2">
+            </a-curvedimage>
+            
+            <a-curvedimage id="video" src="#video-demo" transparent="true" 
+              height="2" radius="3" theta-length="40" rotation="0  80 0" position="0 0 -2">
+            </a-curvedimage>
+
+          <a-light type="directional" color="#fff" intensity="0.2" position="-1 2 1"></a-light>
+          <a-light type="ambient" color="#fff"></a-light>
+          <a-sky color="rgb(200,200,200)" opacity="0.5"></a-sky>
         </a-scene>
         <script>
             document.querySelector("#pana").addEventListener('click', function() {
                 console.log('Entering panorama Demo');
-                console.log(window.location);
                 window.location.href = "demos/panorama/index.html";
             });
             document.querySelector("#lyrics").addEventListener('click', function() {
                 console.log('Entering Lyrics Demo');
-                console.log(window.location);
                 window.location.href = "demos/lyricsVR/index.html";
             });
         </script>
