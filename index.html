@@ -6,7 +6,7 @@
         <script src="./js/aframe.min.js"></script>
     </head>
     <body>
-        <a-scene>
+        <a-scene auto-enter-vr>
             <a-assets>
                 <img id="panorama" src="assets/panorama-background.jpg">
                 <img id="panorama-demo" src="assets/panorama.png">
@@ -45,6 +45,12 @@
           <a-sky color="rgb(200,200,200)" opacity="0.5"></a-sky>
         </a-scene>
         <script>
+            AFRAME.registerComponent('auto-enter-vr', {
+              init: function () {
+                this.el.sceneEl.enterVR();
+              }
+            });
+
             document.querySelector("#pana").addEventListener('click', function() {
                 console.log('Entering panorama Demo');
                 window.location.href = "demos/panorama/index.html";
