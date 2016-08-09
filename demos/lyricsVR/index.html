@@ -9,7 +9,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     </head>
     <body>
-        <a-scene>
+        <a-scene auto-enter-vr>
             <a-assets>
                 <img id="mute" src="assets/volume-mute.png">
                 <img id="unmute" src="assets/volume-high_2.png">
@@ -106,6 +106,18 @@
             </script>
         </a-scene>
         <script>
+            url = window.location.href;
+            vrmode = url.includes('?vr');
+            if(vrmode){
+              console.log('Entering vr mode');
+              AFRAME.registerComponent('auto-enter-vr', {
+               init: function () {
+                this.el.sceneEl.enterVR();
+               }
+              });
+            }
+
+
             var template = $('#hidden-template').html();
             var audio = document.querySelector('#background_audio');
             audio.addEventListener('loadeddata', function() {
@@ -132,7 +144,7 @@
             document.querySelector("#close-image").addEventListener('click', function() {
             console.log('Exiting demo');
             console.log(window.location);
-            window.location.href = "../../index.html";
+            window.location.href = "../../index.html" + (vrmode?"?vr":"");
         });
         </script>
     </body>

@@ -45,19 +45,23 @@
           <a-sky color="rgb(200,200,200)" opacity="0.5"></a-sky>
         </a-scene>
         <script>
-            AFRAME.registerComponent('auto-enter-vr', {
-              init: function () {
+            url = window.location.href;
+            vrmode = url.includes('?vr');
+            if(vrmode){
+              console.log('Entering vr mode');
+              AFRAME.registerComponent('auto-enter-vr', {
+               init: function () {
                 this.el.sceneEl.enterVR();
-              }
-            });
-
+               }
+              });
+            }
             document.querySelector("#pana").addEventListener('click', function() {
                 console.log('Entering panorama Demo');
-                window.location.href = "demos/panorama/index.html";
+                window.location.href = "demos/panorama/index.html" + (vrmode?"?vr":"");
             });
             document.querySelector("#lyrics").addEventListener('click', function() {
                 console.log('Entering Lyrics Demo');
-                window.location.href = "demos/lyricsVR/index.html";
+                window.location.href = "demos/lyricsVR/index.html" + (vrmode?"?vr":"");
             });
         </script>
     </body>
