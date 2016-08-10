@@ -55,6 +55,13 @@
                }
               });
             }
+            document.querySelector('a-scene').addEventListener('enter-vr', function () {
+                vrmode = true;
+            }):
+            document.querySelector('a-scene').addEventListener('enter-vr', function () {
+                vrmode = false;
+            }):
+            
             document.querySelector("#pana").addEventListener('click', function() {
                 console.log('Entering panorama Demo');
                 window.location.href = "demos/panorama/index.html" + (vrmode?"?vr":"");
