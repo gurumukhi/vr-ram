@@ -24,7 +24,7 @@
                 </a-entity>
             </a-entity>
 
-            <a-curvedimage id="mozvr" src="#mozvr-demo" transparent="true" 
+            <a-curvedimage id="vr" src="#mozvr-demo" transparent="true" 
               height="2" radius="3" theta-length="40" rotation="0 240 0" position="0 0 -2">
             </a-curvedimage>
 
@@ -52,12 +52,16 @@
             });
             
             document.querySelector("#pana").addEventListener('click', function() {
-                console.log('Entering panorama Demo');
                 window.location.href = "demos/panorama/index.html";
             });
             document.querySelector("#lyrics").addEventListener('click', function() {
-                console.log('Entering Lyrics Demo');
                 window.location.href = "demos/lyricsVR/index.html";
+            });
+            document.querySelector("#vr").addEventListener('click', function() {
+                window.location.href = "demos/rubiks/index.html";
+            });
+            document.querySelector("#video").addEventListener('click', function() {
+                window.location.href = "demos/video/index.html";
             });
         </script>
     </body>

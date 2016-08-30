@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Rubiks Cube VR</title>
+    <meta name="description" content="Rubiks — A-Frame">
+    <script src="./js/aframe.min.js"></script>
+    <script src="./js/aframe-template-component.js"></script>
+  </head>
+  <body>
+    <a-scene auto-enter-vr>
+
+    <a-assets>
+        <img id="close" src="assets/close-circled.png">
+
+      <script id="faces" type="text/x-jade-template">
+        - for (var x = 0; x < 3; x++) {
+          - for (var y = 0; y < 3; y++) {
+            - for (var z = 0; z < 3; z++) {
+              a-entity(geometry="primitive: box; depth: 2.9; height: 2.9; width: 2.9", material="color: #FFFFFF", position="#{x * 3 - 3} #{y*3} #{z * 3 - 3}", multicolored-cube="colors: 0x009e60, 0x009e60, 0x0051ba, 0x0051ba, 0xffd500, 0xffd500, 0xff5800, 0xff5800, 0xC41E3A, 0xC41E3A, 0xB02020, 0xB02020")
+             -}
+          - }
+        - }
+      </script>
+    </a-assets>
+
+    <a-entity position="0 3 -15" scale="">
+        <a-animation easing="linear" attribute="rotation" fill="forwards" to="360 180 360" dur="3000" repeat="indefinite"></a-animation>
+        <a-entity template="src: #faces"></a-entity>
+    </a-entity>
+
+    <a-image id="close-image" src="#close" position="0 -1 0" scale=""></a-image>
+
+      <a-entity position="0 2 4">
+          <a-entity camera look-controls wasd-controls>
+              <a-entity position="0 0 -3" scale="0.2 0.2 0.2"  geometry="primitive: ring; radiusOuter: 0.20;radiusInner: 0.10;" material="color: #ADD8E6; shader: flat" cursor="maxDistance: 30; fuse: true">
+                  <a-animation begin="click" easing="ease-in" attribute="scale" fill="backwards" from="0.1 0.1 0.1" to="1 1 1" dur="150"></a-animation>
+                  <a-animation begin="fusing" easing="ease-in" attribute="scale" fill="forwards" from="1 1 1" to="0.2 0.2 0.2" dur="1500"></a-animation>
+              </a-entity>
+          </a-entity>
+      </a-entity>
+
+    </a-scene>
+
+    <script>
+          AFRAME.registerComponent('multicolored-cube', {
+            init: function() {
+              var mesh = this.el.getObject3D('mesh');
+              var colors = this.data.colors.split(',');
+              var geom = mesh.geometry;
+              for (var i = 0; i < geom.faces.length; i++) {
+                  var face = geom.faces[i];
+                  face.color.setHex(colors[i]);
+              }
+              mesh.material.vertexColors = THREE.FaceColors;
+              this.el.setObject3D('mesh', mesh);
+            }
+          });
+
+          AFRAME.registerComponent('auto-enter-vr', {
+           init: function () {
+            this.el.sceneEl.enterVR();
+           }
+          });
+
+        document.querySelector("#close-image").addEventListener('click', function() {
+            window.location.href = "../../index.html";
+        }); 
+    </script>
+
+  </body>
+</html>
