@@ -9,8 +9,8 @@
   <body>
     <a-scene auto-enter-vr>
       <a-assets>
-        <img id="close" src="assets/close-circled.png">
         <img id="background" src="./assets/puydesancy.jpg">
+        <img id="close" src="assets/close-circled.png">
       </a-assets>
       <a-image id="close-image" src="#close" position="0 0 0"></a-image>
 
@@ -27,29 +27,16 @@
     </a-scene>
 
     <script>
-        url = window.location.href;
-        vrmode = url.includes('?vr');
-        if(vrmode){
-          console.log('Entering vr mode');
           AFRAME.registerComponent('auto-enter-vr', {
            init: function () {
             this.el.sceneEl.enterVR();
            }
           });
-        }
-
-            document.querySelector('a-scene').addEventListener('enter-vr', function () {
-                vrmode = true;
-            });
-            document.querySelector('a-scene').addEventListener('enter-vr', function () {
-                vrmode = false;
-            });
-            
 
         document.querySelector("#close-image").addEventListener('click', function() {
             console.log('Exiting demo');
             console.log(window.location);
-            window.location.href = "../../index.html" + (vrmode?"?vr":"");
+            window.location.href = "../../index.html";
         }); 
     </script>
 

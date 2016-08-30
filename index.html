@@ -45,30 +45,19 @@
           <a-sky color="rgb(200,200,200)" opacity="0.5"></a-sky>
         </a-scene>
         <script>
-            url = window.location.href;
-            vrmode = url.includes('?vr');
-            if(vrmode){
-              console.log('Entering vr mode');
-              AFRAME.registerComponent('auto-enter-vr', {
-               init: function () {
-                this.el.sceneEl.enterVR();
-               }
-              });
-            }
-            document.querySelector('a-scene').addEventListener('enter-vr', function () {
-                vrmode = true;
-            });
-            document.querySelector('a-scene').addEventListener('enter-vr', function () {
-              vrmode = false;
+            AFRAME.registerComponent('auto-enter-vr', {
+             init: function () {
+              this.el.sceneEl.enterVR();
+             }
             });
             
             document.querySelector("#pana").addEventListener('click', function() {
                 console.log('Entering panorama Demo');
-                window.location.href = "demos/panorama/index.html" + (vrmode?"?vr":"");
+                window.location.href = "demos/panorama/index.html";
             });
             document.querySelector("#lyrics").addEventListener('click', function() {
                 console.log('Entering Lyrics Demo');
-                window.location.href = "demos/lyricsVR/index.html" + (vrmode?"?vr":"");
+                window.location.href = "demos/lyricsVR/index.html";
             });
         </script>
     </body>
