@@ -1,1 +1,1 @@
-VR presentation slides & demos in VR ;)
+A-Frame based VR experience demo.
