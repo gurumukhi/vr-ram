@@ -1,0 +1,123 @@
+<html>
+  <head>
+  <meta charset="utf-8">
+  <title>A-Frame Hack Night India </title>
+    <script src="aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-particle-system-component@1.0.5/dist/aframe-particle-system-component.min.js"></script>
+  </head>
+  <body>
+    <a-scene>
+    <a-entity position="0 10 -15" particle-system="preset: stars; particleCount: 700; color: #00FF00,#0000FF,#FF0000"></a-entity>
+    <!--<a-entity position="5 4 5" particle-system="preset: rain"></a-entity>-->
+    <a-assets>
+     <img id="sky" src="sky2.jpg">
+     <img id="fire" src="fire.png" />
+     <img id="logo" src="nlg.jpg" />
+     <img id="left" src="left.ico" />
+     <img id="right" src="right.ico" />
+     <img id="texture" src="texture.jpg">
+     <img id="sphere" src="vr.jpg">
+     <img id="leftman" src="vrman.png" />
+     <img id="rightman" src="vr2.png" />
+    </a-assets>
+    <a-sky src="#sky"></a-sky>
+    <a-image src="#leftman" position="-3 3 -3" height="2" width="3"></a-image>
+    <a-image src="#rightman" position="2.5 2.2 -3" height="3.7" width="2"></a-image>
+    <a-sphere position="15 2 -4" radius="3" src="#sphere">
+     <a-animation attribute="rotation" repeat="indefinite" dur="20000" to="0 360 0"></a-sphere></a-animation>
+
+    <a-entity>
+    <a-animation attribute="position" from="-70 -8 -15" to="17.5 -8 -15" dur="12000"></a-animation>
+     
+    </a-entity>
+    <a-entity>
+    <a-animation attribute="position" from="0.5 16 -5" to="0.5 -1.4 -5" dur="20000"></a-animation>
+     <a-image src="#logo" height="1" width="4"></a-image>
+    </a-entity>
+
+    <a-entity>
+    <a-animation attribute="position" from="-70 -7.5 -15" to="15 -7.5 -15" dur="40000"></a-animation>
+     <a-image src="#right" height="4" width="4"></a-image>
+    </a-entity>
+
+    <a-entity>
+    <a-animation attribute="position" from="70 -7.5 -15" to="-12 -7.5 -15" dur="40000"></a-animation>
+     <a-image src="#left" height="4" width="4"></a-image>
+    </a-entity>
+
+    
+    <a-text value="Look around left to explore" position="-7.5 -1.5 -5" color="#FF3300"></a-text>
+    <a-text value="Look around right to explore" position="5.8 -1.5 -5" color="#FF3300"></a-text>
+
+    <a-entity id="size" position="0.2 2.2 -1" text="anchor: center; font: mozillavr; value: Welcome"></a-entity>
+    <a-entity id="opacity" position="0.46 2 -1" text="anchor: center; font: mozillavr; wrap-count: 15; value: To"></a-entity>
+    <a-entity id="color" position="0.1 1.8 -1" text="color: #66CC33; anchor: center; font: monoid; wrap-count: 24; value: A-Frame Hack Night India"></a-entity>
+    <a-entity id="color" position="0.1 1.7 -1.5" text="color: magenta; anchor: center; font: monoid; wrap-count: 24; value: 'WebVR India Community'"></a-entity>
+    <!--<a-text value="Welcome to A-Frame Hack Night India" position="-2 1 -3" font size="50" color="black"></a-text>
+    <a-animation attribute="position" from="4 -4 10" to="4 4 10" dur="20000"></a-animation> -->
+
+    <!-- Box Back-->
+          <a-box src="#texture" position="1 1.5 4" depth="1" height="1" width="1" rotation="0 0 0">
+            <a-animation attribute="rotation" easing="ease-in" repeat="indefinite" to="0 360 0">
+            </a-animation>
+          </a-box>
+
+    <!-- colorchange-->
+
+    <a-box position="-8 3 4">
+      <a-animation attribute="material.color" from="red" to="blue" dur="6000" repeat="indefinite"></a-animation>
+    </a-box>
+    <a-entity geometry="primitive: cone; radiusTop: 1; height:3" position="-8 1 4" material="color: #00FFFF; metalness: 0.5">
+  <a-animation attribute="geometry.radiusTop" to="0" repeat="indefinite" dur="6000"></a-animation>
+</a-entity>
+
+  <!--balls-->
+
+  <a-entity position="5 4 5">
+            <a-entity geometry="primitive: sphere; radius: 0.5" position="-1 1 0" material="color: #d50f25">
+                <a-animation attribute="position" from="-1 1 0" to="1 -1 0" duration="3000" direction="alternate" repeat="indefinite"></a-animation>
+            </a-entity>
+            <a-entity geometry="primitive: sphere; radius: 0.5" position="1 1 0" material="color: #009939">
+                <a-animation attribute="position" from="1 1 0" to="-1 -1 0" duration="3000" direction="alternate" repeat="indefinite"></a-animation>
+            </a-entity>
+            <a-entity geometry="primitive: sphere; radius: 0.5" position="-1 -1 0" material="color: #3369e8">
+                <a-animation attribute="position" from="-1 -1 0" to="1 1 0" duration="3000" direction="alternate" repeat="indefinite"></a-animation>
+            </a-entity>
+            <a-entity geometry="primitive: sphere; radius: 0.5" position="1 -1 0" material="color: #eeb211">
+                <a-animation attribute="position" from="1 -1 0" to="-1 1 0" duration="3000" direction="alternate" repeat="indefinite"></a-animation>
+            </a-entity>
+        </a-entity>
+
+    </a-scene>
+    <script>
+    	var size = document.getElementById('size');
+      var objsize = {scale: 70};
+      var tween = new AFRAME.TWEEN.Tween(objsize)
+        .to({scale: 10}, 500)
+        .yoyo( true )
+        .onUpdate(function () {
+          size.setAttribute('text', 'wrapCount', objsize.scale);
+        })
+        .start();
+
+      //   var opacity = document.getElementById('opacity');
+      // var obj = {opacity: 0};
+      // var tween = new AFRAME.TWEEN.Tween(obj)
+      //   .to({opacity: 1}, 500)
+      //   .repeat( Infinity )
+      //   .yoyo( true )
+      //   .onUpdate(function () {
+      //     opacity.setAttribute('text', 'opacity', obj.opacity);
+      //   })
+      //   .start();
+
+
+        var color = document.getElementById('color');
+      setInterval(function() {
+        var randomHexColor = '#'+Math.floor(Math.random()*16777215).toString(16);
+        //color.setAttribute('text', 'color', randomHexColor);
+      }, 1000);
+    </script>
+  </body>
+ </html>
+
